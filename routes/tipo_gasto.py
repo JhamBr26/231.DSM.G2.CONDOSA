@@ -26,7 +26,7 @@ def addTiposGasto():
         db.session.commit()
         return jsonify(data)
 
-@tipo_gasto.route('/update', methods=['POST'])
+@tipo_gasto.route('/tipo_gasto/update', methods=['POST'])
 def updateTiposGasto():
     data = {}
     body = request.get_json()
@@ -39,7 +39,7 @@ def updateTiposGasto():
         db.session.commit()
     return jsonify(tipo_gasto)
 
-@tipo_gasto.route('/delete', methods=['POST'])
+@tipo_gasto.route('/tipo_gasto/delete', methods=['POST'])
 def deleteTiposGasto():
     data = {}
     body = request.get_json()

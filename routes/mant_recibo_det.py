@@ -9,7 +9,7 @@ def getMantReciboDet():
     if request.method == 'GET':
         data = {}
         mant_recibo_det = MantReciboDet.query.all()
-        data['mant_recibo_det'] = [m.serialize() for m in mant_recibo_det]
+        data['mant_recibo_det'] = mant_recibo_det
         return jsonify(data)
 
 @mant_recibo_det.route('/mant_recibo_det/add', methods=['POST'])

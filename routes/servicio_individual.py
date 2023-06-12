@@ -9,7 +9,7 @@ def getServicio_Individual():
     if request.method == 'GET':
         data = {}
         servicio_individual = ServicioIndividual.query.all()
-        data['servicio_individual'] = [m.serialize() for m in servicio_individual]
+        data['servicio_individual'] = servicio_individual
         return jsonify(data)
 
 @servicio_individual.route('/servicio_individual/add', methods=['POST'])
