@@ -17,7 +17,6 @@ def addMantReciboDet():
     data = {}
     if request.method == 'POST':
         body = request.get_json()
-        id_mant_recibo_det = body['id_mant_recibo_det']
         id_mant_recibo = body['id_mant_recibo']
         id_gasto = body['id_gasto']
         importe_predio = body['importe_predio']

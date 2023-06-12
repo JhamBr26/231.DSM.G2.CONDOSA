@@ -18,7 +18,6 @@ def getmant_recibo():
 def addmant_recibo():
     if request.method == 'POST':
         body = request.get_json()
-        id_mant_recibo = body['id_mant_recibo']
         id_casa = body['id_casa']
         n_recibo = body['n_recibo']
         fecha_emision = body['fecha_emision']
@@ -28,7 +27,7 @@ def addmant_recibo():
         observacion = body['observacion']
         id_recibo_estado = body['id_recibo_estado']
         periodo = body['periodo']
-        new_mant_recibo = MantRecibo(id_mant_recibo, id_casa, n_recibo, periodo, fecha_emision,
+        new_mant_recibo = MantRecibo(id_casa, n_recibo, periodo, fecha_emision,
                                      fecha_vencimiento, importe, ajuste, observacion, id_recibo_estado)
         db.session.add(new_mant_recibo)
         db.session.commit()
