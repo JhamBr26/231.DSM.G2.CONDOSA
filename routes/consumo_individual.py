@@ -6,7 +6,7 @@ from utils.db import db
 
 consumo_individual = Blueprint('consumo_individual', __name__)
 
-@consumo_individual.route('/', methods=['GET'])
+@consumo_individual.route('/consumo_individual', methods=['GET'])
 def getConsumosIndividuales():
     if request.method == 'GET':
         data = {}
@@ -14,7 +14,7 @@ def getConsumosIndividuales():
         data["consumos"] = [consumo.serialize() for consumo in consumos]
         return jsonify(data)
 
-@consumo_individual.route('/add', methods=['POST'])
+@consumo_individual.route('/consumo_individual/add', methods=['POST'])
 def addConsumoIndividual():
     data = {}
     if request.method == 'POST':
@@ -37,7 +37,7 @@ def addConsumoIndividual():
         db.session.commit()
         return jsonify(data)
 
-@consumo_individual.route('/update', methods=['POST'])
+@consumo_individual.route('/consumo_individual/update', methods=['POST'])
 def updateConsumoIndividual():
     data = {}
     body = request.get_json()
@@ -65,7 +65,7 @@ def updateConsumoIndividual():
     
     return jsonify(consumo.serialize())
 
-@consumo_individual.route('/delete', methods=['POST'])
+@consumo_individual.route('/consumo_individual/delete', methods=['POST'])
 def deleteConsumoIndividual():
     data = {}
     body = request.get_json()

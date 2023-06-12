@@ -4,7 +4,7 @@ from utils.db import db
 
 mant_recibo_det = Blueprint('mant_recibo_det', __name__)
 
-@mant_recibo_det.route('/', methods=['GET'])
+@mant_recibo_det.route('/mant_recibo_det', methods=['GET'])
 def getMantReciboDet():
     if request.method == 'GET':
         data = {}
@@ -12,7 +12,7 @@ def getMantReciboDet():
         data['mant_recibo_det'] = [m.serialize() for m in mant_recibo_det]
         return jsonify(data)
 
-@mant_recibo_det.route('/add', methods=['POST'])
+@mant_recibo_det.route('/mant_recibo_det/add', methods=['POST'])
 def addMantReciboDet():
     data = {}
     if request.method == 'POST':
@@ -27,7 +27,7 @@ def addMantReciboDet():
         db.session.commit()
         return jsonify(data)
 
-@mant_recibo_det.route('/update', methods=['POST'])
+@mant_recibo_det.route('/mant_recibo_det/update', methods=['POST'])
 def updateMantReciboDet():
     data = {}
     if request.method == 'POST':
@@ -46,7 +46,7 @@ def updateMantReciboDet():
             data['message'] = 'Mant_Recibo_Det not found'
             return jsonify(data), 404
 
-@mant_recibo_det.route('/delete', methods=['POST'])
+@mant_recibo_det.route('/mant_recibo_det/delete', methods=['POST'])
 def deleteMantReciboDet():
     data = {}
     if request.method == 'POST':

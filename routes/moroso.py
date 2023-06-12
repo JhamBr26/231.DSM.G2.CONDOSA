@@ -5,7 +5,7 @@ from utils.db import db
 
 moroso = Blueprint('moroso', __name__)
 
-@moroso.route('/', methods=['GET'])
+@moroso.route('/moroso', methods=['GET'])
 def getMorosos():
     if request.method == 'GET':
         data = {}
@@ -13,7 +13,7 @@ def getMorosos():
         data["morosos"] = [moroso.serialize() for moroso in morosos]
         return jsonify(data)
 
-@moroso.route('/add', methods=['POST'])
+@moroso.route('/moroso/add', methods=['POST'])
 def addMoroso():
     data = {}
     if request.method == 'POST':
@@ -33,7 +33,7 @@ def addMoroso():
         db.session.commit()
         return jsonify(data)
 
-@moroso.route('/update', methods=['POST'])
+@moroso.route('/moroso/update', methods=['POST'])
 def updateMoroso():
     data = {}
     body = request.get_json()
@@ -58,7 +58,7 @@ def updateMoroso():
     
     return jsonify(moroso.serialize())
 
-@moroso.route('/delete', methods=['POST'])
+@moroso.route('/moroso/delete', methods=['POST'])
 def deleteMoroso():
     data = {}
     body = request.get_json()

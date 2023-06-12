@@ -4,7 +4,7 @@ from utils.db import db
 
 clase_gasto = Blueprint('clase_gasto', __name__)
 
-@clase_gasto.route('/', methods=['GET'])
+@clase_gasto.route('/clase_gasto', methods=['GET'])
 def getClasesGasto():
     if request.method == 'GET':
         data = {}
@@ -12,7 +12,7 @@ def getClasesGasto():
         data["clases_gasto"] = clases_gasto
         return jsonify(data)
 
-@clase_gasto.route('/add', methods=['POST'])
+@clase_gasto.route('/clase_gasto/add', methods=['POST'])
 def addClasesGasto():
     data = {}
     if request.method == 'POST':
@@ -24,7 +24,7 @@ def addClasesGasto():
         db.session.commit()
         return jsonify(data)
 
-@clase_gasto.route('/update', methods=['POST'])
+@clase_gasto.route('/clase_gasto/update', methods=['POST'])
 def updateClasesGasto():
     data = {}
     body = request.get_json()
@@ -35,7 +35,7 @@ def updateClasesGasto():
         db.session.commit()
     return jsonify(clase_gasto)
 
-@clase_gasto.route('/delete', methods=['POST'])
+@clase_gasto.route('/clase_gasto/delete', methods=['POST'])
 def deleteClasesGasto():
     data = {}
     body = request.get_json()

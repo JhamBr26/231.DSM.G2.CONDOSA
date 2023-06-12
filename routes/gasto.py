@@ -4,15 +4,15 @@ from utils.db import db
 
 gasto = Blueprint('gasto', __name__)
 
-@gasto.route('/', methods=['GET'])
+@gasto.route('/gasto', methods=['GET'])
 def getGastos():
     if request.method == 'GET':
         data = {}
         gastos = Gasto.query.all()
-        data['gastos'] = [g.serialize() for g in gastos]
+        data['gastos'] = gastos
         return jsonify(data)
 
-@gasto.route('/add', methods=['POST'])
+@gasto.route('/gasto/add', methods=['POST'])
 def addGasto():
     data = {}
     if request.method == 'POST':
@@ -25,7 +25,7 @@ def addGasto():
         db.session.commit()
         return jsonify(data)
 
-@gasto.route('/update', methods=['POST'])
+@gasto.route('/gasto/update', methods=['POST'])
 def updateGasto():
     data = {}
     if request.method == 'POST':
@@ -42,7 +42,7 @@ def updateGasto():
             data['message'] = 'Gasto not found'
             return jsonify(data), 404
 
-@gasto.route('/delete', methods=['POST'])
+@gasto.route('/gasto/delete', methods=['POST'])
 def deleteGasto():
     data = {}
     if request.method == 'POST':

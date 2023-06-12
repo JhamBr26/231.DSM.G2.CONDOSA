@@ -4,16 +4,16 @@ from utils.db import db
 
 servicio_individual = Blueprint('servicio_individual', __name__)
 
-@servicio_individual.route('/', methods=['GET'])
-def getServicioIndividual():
+@servicio_individual.route('/servicio_individual', methods=['GET'])
+def getServicio_Individual():
     if request.method == 'GET':
         data = {}
         servicio_individual = ServicioIndividual.query.all()
-        data['servicio_individual'] = [s.serialize() for s in servicio_individual]
+        data['servicio_individual'] = [m.serialize() for m in servicio_individual]
         return jsonify(data)
 
-@servicio_individual.route('/add', methods=['POST'])
-def addServicioIndividual():
+@servicio_individual.route('/servicio_individual/add', methods=['POST'])
+def addServicio_Individual():
     data = {}
     if request.method == 'POST':
         body = request.get_json()
@@ -29,8 +29,8 @@ def addServicioIndividual():
         db.session.commit()
         return jsonify(data)
 
-@servicio_individual.route('/update', methods=['POST'])
-def updateServicioIndividual():
+@servicio_individual.route('/servicio_individual/update', methods=['POST'])
+def updateServicio_Individual():
     data = {}
     if request.method == 'POST':
         body = request.get_json()
@@ -50,8 +50,8 @@ def updateServicioIndividual():
             data['message'] = 'Servicio_Individual not found'
             return jsonify(data), 404
 
-@servicio_individual.route('/delete', methods=['POST'])
-def deleteServicioIndividual():
+@servicio_individual.route('/servicio_individual/delete', methods=['POST'])
+def deleteServicio_Individual():
     data = {}
     if request.method == 'POST':
         body = request.get_json()

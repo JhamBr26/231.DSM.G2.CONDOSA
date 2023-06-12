@@ -6,7 +6,7 @@ from utils.db import db
 
 cuota_mantenimiento = Blueprint('cuota_mantenimiento', __name__)
 
-@cuota_mantenimiento.route('/', methods=['GET'])
+@cuota_mantenimiento.route('/cuota_mantenimiento', methods=['GET'])
 def getCuotasMantenimiento():
     if request.method == 'GET':
         data = {}
@@ -14,7 +14,7 @@ def getCuotasMantenimiento():
         data["cuotas"] = [cuota.serialize() for cuota in cuotas]
         return jsonify(data)
 
-@cuota_mantenimiento.route('/add', methods=['POST'])
+@cuota_mantenimiento.route('/cuota_mantenimiento/add', methods=['POST'])
 def addCuotaMantenimiento():
     data = {}
     if request.method == 'POST':
@@ -36,7 +36,7 @@ def addCuotaMantenimiento():
         db.session.commit()
         return jsonify(data)
 
-@cuota_mantenimiento.route('/update', methods=['POST'])
+@cuota_mantenimiento.route('/cuota_mantenimiento/update', methods=['POST'])
 def updateCuotaMantenimiento():
     data = {}
     body = request.get_json()
@@ -62,7 +62,7 @@ def updateCuotaMantenimiento():
     
     return jsonify(cuota.serialize())
 
-@cuota_mantenimiento.route('/delete', methods=['POST'])
+@cuota_mantenimiento.route('/cuota_mantenimiento/delete', methods=['POST'])
 def deleteCuotaMantenimiento():
     data = {}
     body = request.get_json()

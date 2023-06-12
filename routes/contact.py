@@ -4,7 +4,7 @@ from utils.db import db
 
 contact = Blueprint('contact', __name__)
 
-@contact.route('/', methods=['GET'])
+@contact.route('/contact', methods=['GET'])
 def getContactos():
     if request.method == 'GET':
         data = {}
@@ -12,7 +12,7 @@ def getContactos():
         data["contactos"] = contactos
         return jsonify(data)
 
-@contact.route('/add', methods=['POST'])
+@contact.route('/contact/add', methods=['POST'])
 def addContactos():
     data = {}
     if request.method == 'POST':
@@ -26,7 +26,7 @@ def addContactos():
         db.session.commit()
         return jsonify(data)
 
-@contact.route('/update', methods=['POST'])
+@contact.route('/contact/update', methods=['POST'])
 def updateContactos():
     data = {}
     body = request.get_json()
@@ -39,7 +39,7 @@ def updateContactos():
         db.session.commit()
     return jsonify(contacto)
 
-@contact.route('/delete', methods=['POST'])
+@contact.route('/contact/delete', methods=['POST'])
 def deleteContactos():
     data = {}
     body = request.get_json()

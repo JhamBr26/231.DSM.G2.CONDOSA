@@ -5,7 +5,7 @@ from utils.db import db
 
 det_recibo = Blueprint('det_recibo', __name__)
 
-@det_recibo.route('/', methods=['GET'])
+@det_recibo.route('/det_recibo', methods=['GET'])
 def getDetallesRecibo():
     if request.method == 'GET':
         data = {}
@@ -13,7 +13,7 @@ def getDetallesRecibo():
         data["detalles"] = [detalle.serialize() for detalle in detalles]
         return jsonify(data)
 
-@det_recibo.route('/add', methods=['POST'])
+@det_recibo.route('/det_recibo/add', methods=['POST'])
 def addDetalleRecibo():
     data = {}
     if request.method == 'POST':
@@ -32,7 +32,7 @@ def addDetalleRecibo():
         db.session.commit()
         return jsonify(data)
 
-@det_recibo.route('/update', methods=['POST'])
+@det_recibo.route('/det_recibo/update', methods=['POST'])
 def updateDetalleRecibo():
     data = {}
     body = request.get_json()
@@ -55,7 +55,7 @@ def updateDetalleRecibo():
     
     return jsonify(detalle.serialize())
 
-@det_recibo.route('/delete', methods=['POST'])
+@det_recibo.route('/det_recibo/delete', methods=['POST'])
 def deleteDetalleRecibo():
     data = {}
     body = request.get_json()

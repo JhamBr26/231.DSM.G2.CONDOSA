@@ -4,7 +4,7 @@ from utils.db import db
 
 cat_individual = Blueprint('cat_individual', __name__)
 
-@cat_individual.route('/', methods=['GET'])
+@cat_individual.route('/cat_individual', methods=['GET'])
 def getCategoriasIndividuales():
     if request.method == 'GET':
         data = {}
@@ -12,7 +12,7 @@ def getCategoriasIndividuales():
         data["categorias"] = [categoria.serialize() for categoria in categorias]
         return jsonify(data)
 
-@cat_individual.route('/add', methods=['POST'])
+@cat_individual.route('/cat_individual/add', methods=['POST'])
 def addCategoriaIndividual():
     data = {}
     if request.method == 'POST':
@@ -27,7 +27,7 @@ def addCategoriaIndividual():
         db.session.commit()
         return jsonify(data)
 
-@cat_individual.route('/update', methods=['POST'])
+@cat_individual.route('/cat_individual/update', methods=['POST'])
 def updateCategoriaIndividual():
     data = {}
     body = request.get_json()
@@ -43,7 +43,7 @@ def updateCategoriaIndividual():
     
     return jsonify(categoria.serialize())
 
-@cat_individual.route('/delete', methods=['POST'])
+@cat_individual.route('/cat_individual/delete', methods=['POST'])
 def deleteCategoriaIndividual():
     data = {}
     body = request.get_json()

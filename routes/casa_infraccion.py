@@ -4,7 +4,7 @@ from utils.db import db
 
 casa_infraccion = Blueprint('casa_infraccion', __name__)
 
-@casa_infraccion.route('/', methods=['GET'])
+@casa_infraccion.route('/casa_infraccion', methods=['GET'])
 def getCasasInfracciones():
     if request.method == 'GET':
         data = {}
@@ -12,7 +12,7 @@ def getCasasInfracciones():
         data["casas_infracciones"] = casas_infracciones
         return jsonify(data)
 
-@casa_infraccion.route('/add', methods=['POST'])
+@casa_infraccion.route('/casa_infraccion/add', methods=['POST'])
 def addCasasInfracciones():
     data = {}
     if request.method == 'POST':
@@ -28,7 +28,7 @@ def addCasasInfracciones():
         db.session.commit()
         return jsonify(data)
 
-@casa_infraccion.route('/update', methods=['POST'])
+@casa_infraccion.route('/casa_infraccion/update', methods=['POST'])
 def updateCasasInfracciones():
     data = {}
     body = request.get_json()
@@ -43,7 +43,7 @@ def updateCasasInfracciones():
         db.session.commit()
     return jsonify(casa_infraccion)
 
-@casa_infraccion.route('/delete', methods=['POST'])
+@casa_infraccion.route('/casa_infraccion/delete', methods=['POST'])
 def deleteCasasInfracciones():
     data = {}
     body = request.get_json()

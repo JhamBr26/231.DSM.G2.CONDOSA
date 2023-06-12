@@ -5,7 +5,7 @@ from utils.db import db
 
 cab_recibo = Blueprint('cab_recibo', __name__)
 
-@cab_recibo.route('/', methods=['GET'])
+@cab_recibo.route('/cab_recibo', methods=['GET'])
 def getCabecerasRecibo():
     if request.method == 'GET':
         data = {}
@@ -13,7 +13,7 @@ def getCabecerasRecibo():
         data["cabeceras"] = [cabecera.serialize() for cabecera in cabeceras]
         return jsonify(data)
 
-@cab_recibo.route('/add', methods=['POST'])
+@cab_recibo.route('/cab_recibo/add', methods=['POST'])
 def addCabeceraRecibo():
     data = {}
     if request.method == 'POST':
@@ -43,7 +43,7 @@ def addCabeceraRecibo():
         db.session.commit()
         return jsonify(data)
 
-@cab_recibo.route('/update', methods=['POST'])
+@cab_recibo.route('/cab_recibo/update', methods=['POST'])
 def updateCabeceraRecibo():
     data = {}
     body = request.get_json()
@@ -82,7 +82,7 @@ def updateCabeceraRecibo():
     
     return jsonify(cabecera.serialize())
 
-@cab_recibo.route('/delete', methods=['POST'])
+@cab_recibo.route('/cab_recibo/delete', methods=['POST'])
 def deleteCabeceraRecibo():
     data = {}
     body = request.get_json()

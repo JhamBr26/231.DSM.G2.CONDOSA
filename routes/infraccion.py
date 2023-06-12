@@ -4,7 +4,7 @@ from utils.db import db
 
 infraccion=Blueprint('infraccion',__name__)
 
-@infraccion.route('/',methods=['GET'])
+@infraccion.route('/infraccion',methods=['GET'])
 def getInfracciones():
     if request.method=='GET':
         data={}
@@ -12,7 +12,7 @@ def getInfracciones():
         data["infracciones"]=infracciones
         return jsonify(data)
 
-@infraccion.route('/add',methods=['POST'])
+@infraccion.route('/infraccion/add',methods=['POST'])
 def addInfracciones():
     data={}
     if request.method=='POST':
@@ -28,7 +28,7 @@ def addInfracciones():
         db.session.commit()
         return jsonify(data)
 
-@infraccion.route('/update',methods=['POST'])
+@infraccion.route('/infraccion/update',methods=['POST'])
 def updateInfracciones():
     data={}
     body=request.get_json()
@@ -43,7 +43,7 @@ def updateInfracciones():
         db.session.commit()
     return jsonify(infraccion)        
 
-@infraccion.route('/delete',methods=['POST'])
+@infraccion.route('/infraccion/delete',methods=['POST'])
 def deleteInfracciones():
     data={}
     body=request.get_json()

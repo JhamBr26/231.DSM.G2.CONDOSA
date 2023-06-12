@@ -4,7 +4,7 @@ from utils.db import db
 
 tipo_gasto = Blueprint('tipo_gasto', __name__)
 
-@tipo_gasto.route('/', methods=['GET'])
+@tipo_gasto.route('/tipo_gasto', methods=['GET'])
 def getTiposGasto():
     if request.method == 'GET':
         data = {}
@@ -12,7 +12,7 @@ def getTiposGasto():
         data["tipos_gasto"] = tipos_gasto
         return jsonify(data)
 
-@tipo_gasto.route('/add', methods=['POST'])
+@tipo_gasto.route('/tipo_gasto/add', methods=['POST'])
 def addTiposGasto():
     data = {}
     if request.method == 'POST':

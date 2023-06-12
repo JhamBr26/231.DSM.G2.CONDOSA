@@ -13,11 +13,11 @@ class ServicioIndividual(db.Model):
     importe: float
 
     id_servicio_individual = db.Column(db.Integer, primary_key=True)
-    id_gasto = db.Column(db.Integer, db.ForeignKey('gasto.id_gasto'))
-    id_casa = db.Column(db.Integer, db.ForeignKey('casa.id_casa'))
+    id_gasto = db.Column(db.Integer)
+    id_casa = db.Column(db.Integer)
     periodo = db.Column(db.String(8))
     cantidad = db.Column(db.Float)
-    consumo = db.Column(db.Float(precision=6, scale=2))
+    consumo = db.Column(db.Float)
     importe = db.Column(db.Float)
 
     def __init__(self, id_gasto, id_casa, periodo, cantidad, consumo, importe):
