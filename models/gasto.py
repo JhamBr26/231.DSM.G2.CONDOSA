@@ -12,6 +12,7 @@ class Gasto(db.Model):
     id_tipo_gasto = db.Column(db.Integer, db.ForeignKey('tipo_gasto.id_tipo_gasto'))
     descripcion = db.Column(db.String(100))
 
-    def __init__(self, id_tipo_gasto, descripcion):
+    def __init__(self, id_gasto, id_tipo_gasto, descripcion):
+        self.id_gasto = id_gasto
         self.id_tipo_gasto = id_tipo_gasto
         self.descripcion = descripcion

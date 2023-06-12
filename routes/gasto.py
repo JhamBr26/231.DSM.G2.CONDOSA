@@ -17,10 +17,11 @@ def addGasto():
     data = {}
     if request.method == 'POST':
         body = request.get_json()
+        id_gasto = body['id_gasto']
         id_tipo_gasto = body['id_tipo_gasto']
         descripcion = body['descripcion']
 
-        new_gasto = Gasto(id_tipo_gasto, descripcion)
+        new_gasto = Gasto(id_gasto, id_tipo_gasto, descripcion)
         db.session.add(new_gasto)
         db.session.commit()
         return jsonify(data)
@@ -37,7 +38,7 @@ def updateGasto():
             gasto.id_tipo_gasto = body['id_tipo_gasto']
             gasto.descripcion = body['descripcion']
             db.session.commit()
-            return jsonify(gasto.serialize())
+            return jsonify(gasto)
         else:
             data['message'] = 'Gasto not found'
             return jsonify(data), 404

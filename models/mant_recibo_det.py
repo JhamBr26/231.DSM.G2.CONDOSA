@@ -16,7 +16,8 @@ class MantReciboDet(db.Model):
     importe_predio = db.Column(db.Float)
     importe_casa = db.Column(db.Float)
 
-    def __init__(self, id_mant_recibo, id_gasto, importe_predio, importe_casa):
+    def __init__(self, id_mant_recibo_det, id_mant_recibo, id_gasto, importe_predio, importe_casa):
+        self.id_mant_recibo_det = id_mant_recibo_det
         self.id_mant_recibo = id_mant_recibo
         self.id_gasto = id_gasto
         self.importe_predio = importe_predio

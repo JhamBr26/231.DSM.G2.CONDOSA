@@ -17,6 +17,7 @@ def addServicio_Individual():
     data = {}
     if request.method == 'POST':
         body = request.get_json()
+        id_servicio_individual = body['id_servicio_individual']
         id_gasto = body['id_gasto']
         id_casa = body['id_casa']
         periodo = body['periodo']
@@ -24,7 +25,7 @@ def addServicio_Individual():
         consumo = body['consumo']
         importe = body['importe']
 
-        new_servicio_individual = ServicioIndividual(id_gasto, id_casa, periodo, cantidad, consumo, importe)
+        new_servicio_individual = ServicioIndividual(id_servicio_individual, id_gasto, id_casa, periodo, cantidad, consumo, importe)
         db.session.add(new_servicio_individual)
         db.session.commit()
         return jsonify(data)
@@ -45,7 +46,7 @@ def updateServicio_Individual():
             servicio_individual.consumo = body['consumo']
             servicio_individual.importe = body['importe']
             db.session.commit()
-            return jsonify(servicio_individual.serialize())
+            return jsonify(servicio_individual)
         else:
             data['message'] = 'Servicio_Individual not found'
             return jsonify(data), 404

@@ -20,7 +20,8 @@ class ServicioIndividual(db.Model):
     consumo = db.Column(db.Float)
     importe = db.Column(db.Float)
 
-    def __init__(self, id_gasto, id_casa, periodo, cantidad, consumo, importe):
+    def __init__(self, id_servicio_individual, id_gasto, id_casa, periodo, cantidad, consumo, importe):
+        self.id_servicio_individual = id_servicio_individual
         self.id_gasto = id_gasto
         self.id_casa = id_casa
         self.periodo = periodo
