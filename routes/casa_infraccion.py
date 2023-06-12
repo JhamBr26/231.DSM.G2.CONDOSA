@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.casa_infraccion import Casa_Infraccion
+from models.casa_infraccion import CasaInfraccion
 from utils.db import db
 
 casa_infraccion = Blueprint('casa_infraccion', __name__)
@@ -8,7 +8,7 @@ casa_infraccion = Blueprint('casa_infraccion', __name__)
 def getCasasInfracciones():
     if request.method == 'GET':
         data = {}
-        casas_infracciones = Casa_Infraccion.query.all()
+        casas_infracciones = CasaInfraccion.query.all()
         data["casas_infracciones"] = casas_infracciones
         return jsonify(data)
 
@@ -23,7 +23,7 @@ def addCasasInfracciones():
         fecha_infraccion = body['fecha_infraccion']
         importe = body['importe']
 
-        new_casa_infraccion = Casa_Infraccion(id_infraccion, id_gasto, periodo, fecha_infraccion, importe)
+        new_casa_infraccion = CasaInfraccion(id_infraccion, id_gasto, periodo, fecha_infraccion, importe)
         db.session.add(new_casa_infraccion)
         db.session.commit()
         return jsonify(data)
@@ -33,7 +33,7 @@ def updateCasasInfracciones():
     data = {}
     body = request.get_json()
     id_casa_infraccion = body['id_casa_infraccion']
-    casa_infraccion = Casa_Infraccion.query.get(id_casa_infraccion)
+    casa_infraccion = CasaInfraccion.query.get(id_casa_infraccion)
     if request.method == 'POST':
         casa_infraccion.id_infraccion = body['id_infraccion']
         casa_infraccion.id_gasto = body['id_gasto']
@@ -48,7 +48,7 @@ def deleteCasasInfracciones():
     data = {}
     body = request.get_json()
     id_casa_infraccion = body['id_casa_infraccion']
-    casa_infraccion = Casa_Infraccion.query.get(id_casa_infraccion)
+    casa_infraccion = CasaInfraccion.query.get(id_casa_infraccion)
     if request.method=='POST':
         db.session.delete(casa_infraccion)
         db.session.commit()

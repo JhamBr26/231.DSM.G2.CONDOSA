@@ -2,7 +2,7 @@ from utils.db import db
 from dataclasses import dataclass
 
 @dataclass
-class Tipo_Gasto(db.Model):
+class TipoGasto(db.Model):
     id_tipo_gasto: int
     id_clase_gasto: int
     descripcion: str

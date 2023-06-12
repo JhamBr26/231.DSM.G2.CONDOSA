@@ -2,7 +2,7 @@ from utils.db import db
 from dataclasses import dataclass
 
 @dataclass
-class Casa_Infraccion(db.Model):
+class CasaInfraccion(db.Model):
     id_casa_infraccion: int
     id_infraccion: int
     id_gasto: int
