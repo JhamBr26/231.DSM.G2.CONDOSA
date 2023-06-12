@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from models.cab_recibo import Cab_Recibo
-from models.casa_habitacion import Casa_Habitacion  # Importar el modelo de la llave foránea
+from models.cab_recibo import CabRecibo
+from models.casa import Casa  # Importar el modelo de la llave foránea
 from utils.db import db
 
 cab_recibo = Blueprint('cab_recibo', __name__)
@@ -9,7 +9,7 @@ cab_recibo = Blueprint('cab_recibo', __name__)
 def getCabecerasRecibo():
     if request.method == 'GET':
         data = {}
-        cabeceras = Cab_Recibo.query.all()
+        cabeceras = CabRecibo.query.all()
         data["cabeceras"] = [cabecera.serialize() for cabecera in cabeceras]
         return jsonify(data)
 
@@ -30,11 +30,11 @@ def addCabeceraRecibo():
         estado = body['estado']
         
         # Validar la existencia del objeto Casa_Habitacion
-        casa_habitacion = Casa_Habitacion.query.get(id_casa_habitacion)
+        casa_habitacion = Casa.query.get(id_casa_habitacion)
         if not casa_habitacion:
             return jsonify({'error': 'La Casa_Habitacion no existe.'}), 404
         
-        nueva_cabecera = Cab_Recibo(id_casa_habitacion=id_casa_habitacion, periodo=periodo, ruc=ruc,
+        nueva_cabecera = CabRecibo(id_casa_habitacion=id_casa_habitacion, periodo=periodo, ruc=ruc,
                                     n_recibo=n_recibo, fecha_emision=fecha_emision,
                                     fecha_vencimiento=fecha_vencimiento, ajuste=ajuste,
                                     total=total, mensaje=mensaje, estado=estado)
@@ -48,7 +48,7 @@ def updateCabeceraRecibo():
     data = {}
     body = request.get_json()
     id_cab_recibo = body['id_cab_recibo']
-    cabecera = Cab_Recibo.query.get(id_cab_recibo)
+    cabecera = CabRecibo.query.get(id_cab_recibo)
     
     if request.method == 'POST':
         id_casa_habitacion = body['id_casa_habitacion']
@@ -63,7 +63,7 @@ def updateCabeceraRecibo():
         estado = body['estado']
         
         # Validar la existencia del objeto Casa_Habitacion
-        casa_habitacion = Casa_Habitacion.query.get(id_casa_habitacion)
+        casa_habitacion = Casa.query.get(id_casa_habitacion)
         if not casa_habitacion:
             return jsonify({'error': 'La Casa_Habitacion no existe.'}), 404
         
@@ -87,7 +87,7 @@ def deleteCabeceraRecibo():
     data = {}
     body = request.get_json()
     id_cab_recibo = body['id_cab_recibo']
-    cabecera = Cab_Recibo.query.get(id_cab_recibo)
+    cabecera = CabRecibo.query.get(id_cab_recibo)
     
     if request.method == 'POST':
         db.session.delete(cabecera)

@@ -1,9 +1,8 @@
 from utils.db import db
 from dataclasses import dataclass
 
-
 @dataclass
-class Cat_Individual(db.Model):
+class CatIndividual(db.Model):
     id_cat_individual: int
     nombre: str
     descripcion: str

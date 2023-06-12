@@ -2,9 +2,8 @@ from utils.db import db
 from dataclasses import dataclass
 from datetime import datetime
 
-
 @dataclass
-class Cab_Recibo(db.Model):
+class CabRecibo(db.Model):
     id_casa_habitacion: int
     id_cab_recibo: int
     periodo: str

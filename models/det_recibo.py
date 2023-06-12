@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Det_Recibo(db.Model):
+class DetRecibo(db.Model):
     id_det_recibo: int
     id_cab_recibo: int
     subtotal: float

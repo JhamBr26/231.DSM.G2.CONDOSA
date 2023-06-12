@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Cat_Mantenimiento(db.Model):
+class CatMantenimiento(db.Model):
     id_cat_mantenimiento: int
     nombre: str
     descripcion: str

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Servicio_Individual(db.Model):
+class ServicioIndividual(db.Model):
     id_servicio_individual: int
     id_gasto: int
     id_casa: int

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Cuota_Mantenimiento(db.Model):
+class CuotaMantenimiento(db.Model):
     id_cuota_mantenimiento: int
     id_det_recibo: int
     id_cat_mantenimiento: int

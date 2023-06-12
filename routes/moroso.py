@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models.moroso import Moroso
-from models.cab_recibo import Cab_Recibo  # Importar el modelo de la llave foránea id_cab_recibo
+from models.cab_recibo import CabRecibo  # Importar el modelo de la llave foránea id_cab_recibo
 from utils.db import db
 
 moroso = Blueprint('moroso', __name__)
@@ -23,7 +23,7 @@ def addMoroso():
         total_mora = body['total_mora']
         
         # Validar la existencia del objeto Cab_Recibo
-        cab_recibo = Cab_Recibo.query.get(id_cab_recibo)
+        cab_recibo = CabRecibo.query.get(id_cab_recibo)
         if not cab_recibo:
             return jsonify({'error': 'El Cab_Recibo no existe.'}), 404
         
@@ -46,7 +46,7 @@ def updateMoroso():
         total_mora = body['total_mora']
         
         # Validar la existencia del objeto Cab_Recibo
-        cab_recibo = Cab_Recibo.query.get(id_cab_recibo)
+        cab_recibo = CabRecibo.query.get(id_cab_recibo)
         if not cab_recibo:
             return jsonify({'error': 'El Cab_Recibo no existe.'}), 404
         

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.det_recibo import Det_Recibo
+from models.det_recibo import DetRecibo
 from models.cab_recibo import Cab_Recibo  # Importar el modelo de la llave foránea
 from utils.db import db
 
@@ -9,7 +9,7 @@ det_recibo = Blueprint('det_recibo', __name__)
 def getDetallesRecibo():
     if request.method == 'GET':
         data = {}
-        detalles = Det_Recibo.query.all()
+        detalles = DetRecibo.query.all()
         data["detalles"] = [detalle.serialize() for detalle in detalles]
         return jsonify(data)
 
@@ -26,7 +26,7 @@ def addDetalleRecibo():
         if not cab_recibo:
             return jsonify({'error': 'El Cab_Recibo no existe.'}), 404
         
-        nuevo_detalle = Det_Recibo(id_cab_recibo=id_cab_recibo, subtotal=subtotal)
+        nuevo_detalle = DetRecibo(id_cab_recibo=id_cab_recibo, subtotal=subtotal)
         
         db.session.add(nuevo_detalle)
         db.session.commit()
@@ -37,7 +37,7 @@ def updateDetalleRecibo():
     data = {}
     body = request.get_json()
     id_det_recibo = body['id_det_recibo']
-    detalle = Det_Recibo.query.get(id_det_recibo)
+    detalle = DetRecibo.query.get(id_det_recibo)
     
     if request.method == 'POST':
         id_cab_recibo = body['id_cab_recibo']
@@ -60,7 +60,7 @@ def deleteDetalleRecibo():
     data = {}
     body = request.get_json()
     id_det_recibo = body['id_det_recibo']
-    detalle = Det_Recibo.query.get(id_det_recibo)
+    detalle = DetRecibo.query.get(id_det_recibo)
     
     if request.method == 'POST':
         db.session.delete(detalle)

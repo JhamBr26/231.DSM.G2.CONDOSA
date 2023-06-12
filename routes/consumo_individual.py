@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from models.consumo_individual import Consumo_Individual
-from models.det_recibo import Det_Recibo  # Importar el modelo de la llave foránea id_det_recibo
-from models.cat_individual import Cat_Individual  # Importar el modelo de la llave foránea id_cat_individual
+from models.consumo_individual import ConsumoIndividual
+from models.det_recibo import DetRecibo  # Importar el modelo de la llave foránea id_det_recibo
+from models.cat_individual import CatIndividual  # Importar el modelo de la llave foránea id_cat_individual
 from utils.db import db
 
 consumo_individual = Blueprint('consumo_individual', __name__)
@@ -10,7 +10,7 @@ consumo_individual = Blueprint('consumo_individual', __name__)
 def getConsumosIndividuales():
     if request.method == 'GET':
         data = {}
-        consumos = Consumo_Individual.query.all()
+        consumos = ConsumoIndividual.query.all()
         data["consumos"] = [consumo.serialize() for consumo in consumos]
         return jsonify(data)
 
@@ -25,12 +25,12 @@ def addConsumoIndividual():
         importe = body['importe']
         
         # Validar la existencia de los objetos Det_Recibo y Cat_Individual
-        det_recibo = Det_Recibo.query.get(id_det_recibo)
-        cat_individual = Cat_Individual.query.get(id_cat_individual)
+        det_recibo = DetRecibo.query.get(id_det_recibo)
+        cat_individual = CatIndividual.query.get(id_cat_individual)
         if not det_recibo or not cat_individual:
             return jsonify({'error': 'El Det_Recibo o Cat_Individual no existe.'}), 404
         
-        nuevo_consumo = Consumo_Individual(id_det_recibo=id_det_recibo, id_cat_individual=id_cat_individual,
+        nuevo_consumo = ConsumoIndividual(id_det_recibo=id_det_recibo, id_cat_individual=id_cat_individual,
                                            cantidad=cantidad, importe=importe)
         
         db.session.add(nuevo_consumo)
@@ -42,7 +42,7 @@ def updateConsumoIndividual():
     data = {}
     body = request.get_json()
     id_consumo_individual = body['id_consumo_individual']
-    consumo = Consumo_Individual.query.get(id_consumo_individual)
+    consumo = ConsumoIndividual.query.get(id_consumo_individual)
     
     if request.method == 'POST':
         id_det_recibo = body['id_det_recibo']
@@ -51,8 +51,8 @@ def updateConsumoIndividual():
         importe = body['importe']
         
         # Validar la existencia de los objetos Det_Recibo y Cat_Individual
-        det_recibo = Det_Recibo.query.get(id_det_recibo)
-        cat_individual = Cat_Individual.query.get(id_cat_individual)
+        det_recibo = DetRecibo.query.get(id_det_recibo)
+        cat_individual = CatIndividual.query.get(id_cat_individual)
         if not det_recibo or not cat_individual:
             return jsonify({'error': 'El Det_Recibo o Cat_Individual no existe.'}), 404
         
@@ -70,7 +70,7 @@ def deleteConsumoIndividual():
     data = {}
     body = request.get_json()
     id_consumo_individual = body['id_consumo_individual']
-    consumo = Consumo_Individual.query.get(id_consumo_individual)
+    consumo = ConsumoIndividual.query.get(id_consumo_individual)
     
     if request.method == 'POST':
         db.session.delete(consumo)

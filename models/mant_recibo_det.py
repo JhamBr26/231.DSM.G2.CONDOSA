@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Mant_Recibo_Det(db.Model):
+class MantReciboDet(db.Model):
     id_mant_recibo_det: int
     id_mant_recibo: int
     id_gasto: int

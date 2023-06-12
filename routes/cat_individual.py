@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.cat_individual import Cat_Individual
+from models.cat_individual import CatIndividual
 from utils.db import db
 
 cat_individual = Blueprint('cat_individual', __name__)
@@ -8,7 +8,7 @@ cat_individual = Blueprint('cat_individual', __name__)
 def getCategoriasIndividuales():
     if request.method == 'GET':
         data = {}
-        categorias = Cat_Individual.query.all()
+        categorias = CatIndividual.query.all()
         data["categorias"] = [categoria.serialize() for categoria in categorias]
         return jsonify(data)
 
@@ -21,7 +21,7 @@ def addCategoriaIndividual():
         descripcion = body['descripcion']
         precio = body['precio']
         
-        nueva_categoria = Cat_Individual(nombre=nombre, descripcion=descripcion, precio=precio)
+        nueva_categoria = CatIndividual(nombre=nombre, descripcion=descripcion, precio=precio)
         
         db.session.add(nueva_categoria)
         db.session.commit()
@@ -32,7 +32,7 @@ def updateCategoriaIndividual():
     data = {}
     body = request.get_json()
     id_cat_individual = body['id_cat_individual']
-    categoria = Cat_Individual.query.get(id_cat_individual)
+    categoria = CatIndividual.query.get(id_cat_individual)
     
     if request.method == 'POST':
         categoria.nombre = body['nombre']
@@ -48,7 +48,7 @@ def deleteCategoriaIndividual():
     data = {}
     body = request.get_json()
     id_cat_individual = body['id_cat_individual']
-    categoria = Cat_Individual.query.get(id_cat_individual)
+    categoria = CatIndividual.query.get(id_cat_individual)
     
     if request.method == 'POST':
         db.session.delete(categoria)

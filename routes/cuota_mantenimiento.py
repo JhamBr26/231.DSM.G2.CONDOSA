@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from models.cuota_mantenimiento import Cuota_Mantenimiento
-from models.det_recibo import Det_Recibo  # Importar el modelo de la llave foránea id_det_recibo
-from models.cat_mantenimiento import Cat_Mantenimiento  # Importar el modelo de la llave foránea id_cat_mantenimiento
+from models.cuota_mantenimiento import CuotaMantenimiento
+from models.det_recibo import DetRecibo  # Importar el modelo de la llave foránea id_det_recibo
+from models.cat_mantenimiento import CatMantenimiento  # Importar el modelo de la llave foránea id_cat_mantenimiento
 from utils.db import db
 
 cuota_mantenimiento = Blueprint('cuota_mantenimiento', __name__)
@@ -10,7 +10,7 @@ cuota_mantenimiento = Blueprint('cuota_mantenimiento', __name__)
 def getCuotasMantenimiento():
     if request.method == 'GET':
         data = {}
-        cuotas = Cuota_Mantenimiento.query.all()
+        cuotas = CuotaMantenimiento.query.all()
         data["cuotas"] = [cuota.serialize() for cuota in cuotas]
         return jsonify(data)
 
@@ -24,12 +24,12 @@ def addCuotaMantenimiento():
         importe = body['importe']
         
         # Validar la existencia de los objetos Det_Recibo y Cat_Mantenimiento
-        det_recibo = Det_Recibo.query.get(id_det_recibo)
-        cat_mantenimiento = Cat_Mantenimiento.query.get(id_cat_mantenimiento)
+        det_recibo = DetRecibo.query.get(id_det_recibo)
+        cat_mantenimiento = CatMantenimiento.query.get(id_cat_mantenimiento)
         if not det_recibo or not cat_mantenimiento:
             return jsonify({'error': 'El Det_Recibo o Cat_Mantenimiento no existe.'}), 404
         
-        nueva_cuota = Cuota_Mantenimiento(id_det_recibo=id_det_recibo, id_cat_mantenimiento=id_cat_mantenimiento,
+        nueva_cuota = CuotaMantenimiento(id_det_recibo=id_det_recibo, id_cat_mantenimiento=id_cat_mantenimiento,
                                           importe=importe)
         
         db.session.add(nueva_cuota)
@@ -41,7 +41,7 @@ def updateCuotaMantenimiento():
     data = {}
     body = request.get_json()
     id_cuota_mantenimiento = body['id_cuota_mantenimiento']
-    cuota = Cuota_Mantenimiento.query.get(id_cuota_mantenimiento)
+    cuota = CuotaMantenimiento.query.get(id_cuota_mantenimiento)
     
     if request.method == 'POST':
         id_det_recibo = body['id_det_recibo']
@@ -49,8 +49,8 @@ def updateCuotaMantenimiento():
         importe = body['importe']
         
         # Validar la existencia de los objetos Det_Recibo y Cat_Mantenimiento
-        det_recibo = Det_Recibo.query.get(id_det_recibo)
-        cat_mantenimiento = Cat_Mantenimiento.query.get(id_cat_mantenimiento)
+        det_recibo = DetRecibo.query.get(id_det_recibo)
+        cat_mantenimiento = CatMantenimiento.query.get(id_cat_mantenimiento)
         if not det_recibo or not cat_mantenimiento:
             return jsonify({'error': 'El Det_Recibo o Cat_Mantenimiento no existe.'}), 404
         
@@ -67,7 +67,7 @@ def deleteCuotaMantenimiento():
     data = {}
     body = request.get_json()
     id_cuota_mantenimiento = body['id_cuota_mantenimiento']
-    cuota = Cuota_Mantenimiento.query.get(id_cuota_mantenimiento)
+    cuota = CuotaMantenimiento.query.get(id_cuota_mantenimiento)
     
     if request.method == 'POST':
         db.session.delete(cuota)
