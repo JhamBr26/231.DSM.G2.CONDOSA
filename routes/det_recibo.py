@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models.det_recibo import DetRecibo
-from models.cab_recibo import Cab_Recibo  # Importar el modelo de la llave foránea
+from models.cab_recibo import CabRecibo  # Importar el modelo de la llave foránea
 from utils.db import db
 
 det_recibo = Blueprint('det_recibo', __name__)
@@ -22,7 +22,7 @@ def addDetalleRecibo():
         subtotal = body['subtotal']
         
         # Validar la existencia del objeto Cab_Recibo
-        cab_recibo = Cab_Recibo.query.get(id_cab_recibo)
+        cab_recibo = CabRecibo.query.get(id_cab_recibo)
         if not cab_recibo:
             return jsonify({'error': 'El Cab_Recibo no existe.'}), 404
         
@@ -44,7 +44,7 @@ def updateDetalleRecibo():
         subtotal = body['subtotal']
         
         # Validar la existencia del objeto Cab_Recibo
-        cab_recibo = Cab_Recibo.query.get(id_cab_recibo)
+        cab_recibo = CabRecibo.query.get(id_cab_recibo)
         if not cab_recibo:
             return jsonify({'error': 'El Cab_Recibo no existe.'}), 404
         

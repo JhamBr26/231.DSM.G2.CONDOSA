@@ -2,9 +2,9 @@ from flask import Blueprint, request, jsonify
 from models.servicio_individual import ServicioIndividual
 from utils.db import db
 
-servicio_individual_blueprint = Blueprint('servicio_individual', __name__)
+servicio_individual = Blueprint('servicio_individual', __name__)
 
-@servicio_individual_blueprint.route('/', methods=['GET'])
+@servicio_individual.route('/', methods=['GET'])
 def getServicioIndividual():
     if request.method == 'GET':
         data = {}
@@ -12,7 +12,7 @@ def getServicioIndividual():
         data['servicio_individual'] = [s.serialize() for s in servicio_individual]
         return jsonify(data)
 
-@servicio_individual_blueprint.route('/add', methods=['POST'])
+@servicio_individual.route('/add', methods=['POST'])
 def addServicioIndividual():
     data = {}
     if request.method == 'POST':
@@ -29,7 +29,7 @@ def addServicioIndividual():
         db.session.commit()
         return jsonify(data)
 
-@servicio_individual_blueprint.route('/update', methods=['POST'])
+@servicio_individual.route('/update', methods=['POST'])
 def updateServicioIndividual():
     data = {}
     if request.method == 'POST':
@@ -50,7 +50,7 @@ def updateServicioIndividual():
             data['message'] = 'Servicio_Individual not found'
             return jsonify(data), 404
 
-@servicio_individual_blueprint.route('/delete', methods=['POST'])
+@servicio_individual.route('/delete', methods=['POST'])
 def deleteServicioIndividual():
     data = {}
     if request.method == 'POST':

@@ -2,9 +2,9 @@ from flask import Blueprint, request, jsonify
 from models.gasto import Gasto
 from utils.db import db
 
-gasto_blueprint = Blueprint('gasto', __name__)
+gasto = Blueprint('gasto', __name__)
 
-@gasto_blueprint.route('/', methods=['GET'])
+@gasto.route('/', methods=['GET'])
 def getGastos():
     if request.method == 'GET':
         data = {}
@@ -12,7 +12,7 @@ def getGastos():
         data['gastos'] = [g.serialize() for g in gastos]
         return jsonify(data)
 
-@gasto_blueprint.route('/add', methods=['POST'])
+@gasto.route('/add', methods=['POST'])
 def addGasto():
     data = {}
     if request.method == 'POST':
@@ -25,7 +25,7 @@ def addGasto():
         db.session.commit()
         return jsonify(data)
 
-@gasto_blueprint.route('/update', methods=['POST'])
+@gasto.route('/update', methods=['POST'])
 def updateGasto():
     data = {}
     if request.method == 'POST':
@@ -42,7 +42,7 @@ def updateGasto():
             data['message'] = 'Gasto not found'
             return jsonify(data), 404
 
-@gasto_blueprint.route('/delete', methods=['POST'])
+@gasto.route('/delete', methods=['POST'])
 def deleteGasto():
     data = {}
     if request.method == 'POST':
