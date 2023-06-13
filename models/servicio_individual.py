@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 @dataclass
 class ServicioIndividual(db.Model):
+    id_servicio_individual: int
     id_gasto: int
     id_casa: int
     periodo: str
@@ -11,6 +12,7 @@ class ServicioIndividual(db.Model):
     consumo: float
     importe: float
 
+    id_servicio_individual = db.Column(db.Integer, primary_key=True)
     id_gasto = db.Column(db.Integer)
     id_casa = db.Column(db.Integer)
     periodo = db.Column(db.String(8))

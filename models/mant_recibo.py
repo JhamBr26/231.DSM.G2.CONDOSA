@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 @dataclass
 class MantRecibo(db.Model):
+    id_mant_recibo: int
     id_casa: int
     n_recibo: str
     periodo: str
@@ -14,6 +15,7 @@ class MantRecibo(db.Model):
     observacion: str
     id_recibo_estado: int
 
+    id_mant_recibo = db.Column(db.Integer, primary_key=True)
     id_casa = db.Column(db.Integer)
     n_recibo = db.Column(db.String(160))
     periodo = db.Column(db.String(160))

@@ -3,12 +3,14 @@ from dataclasses import dataclass
 
 @dataclass
 class CasaInfraccion(db.Model):
+    id_casa_infraccion: int
     id_infraccion: int
     id_gasto: int
     periodo: str
     fecha_infraccion: str
     importe: float
     
+    id_casa_infraccion = db.Column(db.Integer, primary_key=True)
     id_infraccion = db.Column(db.Integer)
     id_gasto = db.Column(db.Integer)
     periodo = db.Column(db.String(8), nullable=False)
