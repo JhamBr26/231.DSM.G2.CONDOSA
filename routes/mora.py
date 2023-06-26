@@ -10,7 +10,7 @@ def getMora():
     if request.method == 'GET':
         data = {}
         all_cat_ind = Mora.query.all()
-        data["mora"] = all_cat_ind
+        data["mora"] = [mora.serialize() for  mora in all_cat_ind ] 
         return jsonify(data)
 
 

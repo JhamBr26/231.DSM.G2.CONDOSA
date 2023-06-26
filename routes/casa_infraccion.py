@@ -9,7 +9,7 @@ def getCasasInfracciones():
     if request.method == 'GET':
         data = {}
         casas_infracciones = CasaInfraccion.query.all()
-        data["casas_infracciones"] = casas_infracciones
+        data["casas_infracciones"] = [casa_infraccion.serialize()  for casa_infraccion in casas_infracciones]
         return jsonify(data)
 
 @casa_infraccion.route('/casa_infraccion/add', methods=['POST'])

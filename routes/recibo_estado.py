@@ -10,7 +10,7 @@ def getReciboEstado():
     if request.method == 'GET':
         data = {}
         all_recibo = ReciboEstado.query.all()
-        data["recibo_estado"] = all_recibo
+        data["recibo_estado"] = [reciboEstado.serialize() for  reciboEstado in all_recibo ] 
         return jsonify(data)
 
 

@@ -9,7 +9,7 @@ def getGastos():
     if request.method == 'GET':
         data = {}
         gastos = Gasto.query.all()
-        data['gastos'] = gastos
+        data['gastos'] = [gasto.serialize() for  gasto in gastos ]
         return jsonify(data)
 
 @gasto.route('/gasto/add', methods=['POST'])

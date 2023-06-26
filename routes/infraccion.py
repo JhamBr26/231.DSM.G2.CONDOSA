@@ -9,7 +9,7 @@ def getInfracciones():
     if request.method=='GET':
         data={}
         infracciones=Infraccion.query.all()
-        data["infracciones"]=infracciones
+        data["infracciones"]= [infraccion.serialize() for  infraccion in infracciones ]
         return jsonify(data)
 
 @infraccion.route('/infraccion/add',methods=['POST'])

@@ -9,7 +9,7 @@ def getContactos():
     if request.method == 'GET':
         data = {}
         contactos = Contact.query.all()
-        data["contactos"] = contactos
+        data["contactos"] =  [contacto.serialize() for  contacto in contactos ]
         return jsonify(data)
 
 @contact.route('/contact/add', methods=['POST'])

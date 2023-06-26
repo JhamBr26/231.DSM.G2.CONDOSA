@@ -9,7 +9,7 @@ def getClasesGasto():
     if request.method == 'GET':
         data = {}
         clases_gasto = ClaseGasto.query.all()
-        data["clases_gasto"] = clases_gasto
+        data["clases_gasto"] = [clase_gasto.serialize() for  clase_gasto in clases_gasto ]
         return jsonify(data)
 
 @clase_gasto.route('/clase_gasto/add', methods=['POST'])

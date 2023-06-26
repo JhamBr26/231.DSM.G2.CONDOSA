@@ -10,7 +10,7 @@ def getmant_recibo():
     if request.method == 'GET':
         data = {}
         all_cat_ind = MantRecibo.query.all()
-        data["mant_recibo"] = all_cat_ind
+        data["mant_recibo"] = [cat_ind.serialize() for  cat_ind in all_cat_ind ] 
         return jsonify(data)
 
 

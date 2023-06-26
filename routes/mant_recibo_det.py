@@ -8,8 +8,8 @@ mant_recibo_det = Blueprint('mant_recibo_det', __name__)
 def getMantReciboDet():
     if request.method == 'GET':
         data = {}
-        mant_recibo_det = MantReciboDet.query.all()
-        data['mant_recibo_det'] = mant_recibo_det
+        mant_recibos_det = MantReciboDet.query.all()
+        data['mant_recibo_det'] = [mant_recibo_det.serialize() for  mant_recibo_det in mant_recibos_det ]
         return jsonify(data)
 
 @mant_recibo_det.route('/mant_recibo_det/add', methods=['POST'])
