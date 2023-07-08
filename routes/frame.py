@@ -1,13 +1,14 @@
 from flask import Blueprint, request, jsonify
 from models.gasto import Gasto
 from models.mant_recibo_det import MantReciboDet
+from models.mant_recibo import MantRecibo
 from utils.db import db
 
 frame = Blueprint('frame', __name__)
 
 
-@frame.route('/seccion/<int:id_mant_recibo>', methods=['GET'])
-def getSeccion1(id_mant_recibo):
+@frame.route('/mantenimiento/detalle/<int:id_casa>', methods=['GET'])
+def getDetalleRecibo(id_mant_recibo):
     if request.method == 'GET':
         response = []
         data = db.session.query(MantReciboDet.id_gasto, Gasto.descripcion, MantReciboDet.importe_casa).join(
@@ -20,3 +21,10 @@ def getSeccion1(id_mant_recibo):
         else:
             response = {"message": "No se encontraron datos"}
         return jsonify(response)
+
+
+@frame.route('/mantenimiento/casa/<int:id_casa>', methods=['GET'])
+def getRecibo(id_casa):
+    if request.method == 'GET':
+        data = MantRecibo.query.filter(MantRecibo.id_casa == id_casa).all()
+        return jsonify(data)
