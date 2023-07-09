@@ -49,3 +49,19 @@ def getRecibo(id_casa):
     if request.method == 'GET':
         data = MantRecibo.query.filter(MantRecibo.id_casa == id_casa).all()
         return jsonify(data)
+
+
+@frame.route('/mantenimiento/periodos/<int:id_casa>', methods=['GET'])
+def getPeriodos(id_casa):
+    sql = text(
+        f"""select id_mant_recibo, periodo, importe from mant_recibo where id_casa = {id_casa}""")
+    if request.method == 'GET':
+        response = []
+        data = db.session.execute(sql).fetchall()
+        if data:
+            for i in data:
+                response.append({"id_mant_recibo": i.id_mant_recibo,
+                                "periodo": i.periodo, "importe": i.importe})
+        else:
+            response = {"message": "No se encontraron datos"}
+        return jsonify(response)
