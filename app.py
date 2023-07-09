@@ -1,9 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 from utils.db import db
 from routes import cab_recibo, casa_infraccion, cat_individual, cat_mantenimiento, clase_gasto, consumo_individual, contact, cuota_mantenimiento, det_recibo, frame, gasto, infraccion,  mant_recibo_det, mant_recibo, mora, moroso, recibo_estado, servicio_individual, tipo_gasto
 from config import DATABASE_CONNECTION
 
 app = Flask(__name__)
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_CONNECTION
 db.init_app(app)
 

@@ -3,8 +3,29 @@ from models.gasto import Gasto
 from models.mant_recibo_det import MantReciboDet
 from models.mant_recibo import MantRecibo
 from utils.db import db
+from sqlalchemy import text
 
 frame = Blueprint('frame', __name__)
+
+
+@frame.route('/mantenimiento/persona/<int:id_persona>', methods=['GET'])
+def getUsuario(id_persona):
+    sql = text(f"""select  pe.id_persona, pe.nombres, pe.apellido_paterno, pe.apellido_materno, c.numero, c.piso, p.descripcion 
+                from public.persona pe
+                join public.inquilino i on pe.id_persona = i.id_persona
+                join public.casa c on i.id_casa = c.id_casa
+                join public.predio p on c.id_predio = p.id_predio
+                where pe.id_persona = {id_persona} and c.id_casa = 2""")
+    if request.method == 'GET':
+        response = {}
+        data = db.session.execute(sql).fetchall()
+        if data:
+            for i in data:
+                response = {"id_persona": i.id_persona, "nombres": i.nombres, "apellido_paterno": i.apellido_paterno,
+                            "apellido_materno": i.apellido_materno, "numero": i.numero, "piso": i.piso, "descripcion": i.descripcion}
+        else:
+            response = {"message": "No se encontraron datos"}
+        return jsonify(response)
 
 
 @frame.route('/mantenimiento/detalle/<int:id_casa>', methods=['GET'])
