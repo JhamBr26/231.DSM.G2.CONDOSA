@@ -45,9 +45,26 @@ def getDetalleRecibo(id_mant_recibo):
 
 
 @frame.route('/mantenimiento/casa/<int:id_casa>', methods=['GET'])
-def getRecibo(id_casa):
+def getRecibos(id_casa):
     if request.method == 'GET':
-        data = MantRecibo.query.filter(MantRecibo.id_casa == id_casa).all()
+        data = MantRecibo.query.filter(
+            MantRecibo.id_casa == id_casa).all()
+        return jsonify(data)
+
+
+@frame.route('/mantenimiento/casa/pagado/<int:id_casa>', methods=['GET'])
+def getRecibosPagados(id_casa):
+    if request.method == 'GET':
+        data = MantRecibo.query.filter(
+            MantRecibo.id_casa == id_casa).filter(MantRecibo.id_recibo_estado == 2).all()
+        return jsonify(data)
+
+
+@frame.route('/mantenimiento/casa/pendiente/<int:id_casa>', methods=['GET'])
+def getRecibosPendientes(id_casa):
+    if request.method == 'GET':
+        data = MantRecibo.query.filter(
+            MantRecibo.id_casa == id_casa).filter(MantRecibo.id_recibo_estado == 1).all()
         return jsonify(data)
 
 
