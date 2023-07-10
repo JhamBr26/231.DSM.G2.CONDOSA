@@ -28,7 +28,7 @@ def getUsuario(id_persona):
         return jsonify(response)
 
 
-@frame.route('/mantenimiento/detalle/<int:id_casa>', methods=['GET'])
+@frame.route('/mantenimiento/detalle/<int:id_mant_recibo>', methods=['GET'])
 def getDetalleRecibo(id_mant_recibo):
     if request.method == 'GET':
         response = []
